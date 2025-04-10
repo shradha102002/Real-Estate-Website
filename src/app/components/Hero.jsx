@@ -21,7 +21,7 @@ export default function Hero() {
       >
         <p className="text-sm mb-2">PROPERTY FOR SALE & FOR RENT AROUND THE WORLD</p>
         <h1 className="text-3xl md:text-5xl font-bold mb-6">
-          Search and Find Your <span className="text-red-400">Family House</span>
+          Search and Find Your <span className="text-orange-400">Family House</span>
         </h1>
 
         {/* Icons */}
