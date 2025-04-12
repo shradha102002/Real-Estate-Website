@@ -1,5 +1,6 @@
 'use client';
-import Navbar from '../components/Navbar';
+
+import { Suspense } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PropertyList from '../components/PropertyList';
@@ -8,15 +9,15 @@ import Link from 'next/link';
 export default function PropertiesPage() {
   return (
     <div className="m-0 p-0">
-      
       <Header />
 
       <section className="m-0 p-0 max-w-7xl mx-auto">
-        <PropertyList />
+        {/* ✅ Wrapped PropertyList in Suspense */}
+        <Suspense fallback={<div className="text-center py-10">Loading properties...</div>}>
+          <PropertyList />
+        </Suspense>
 
-        
-        
-        {/* Back to Home Button Centered */}
+        {/* Back to Home Button */}
         <div className="flex justify-center mt-10 mb-10">
           <Link
             href="/"
