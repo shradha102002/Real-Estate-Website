@@ -1,9 +1,6 @@
-// src/components/PropertyList.jsx
-'use client';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import PropertyModel from './PropertyModel';
-
-
 
 const properties = [
   {
@@ -16,25 +13,25 @@ const properties = [
   },
   {
     id: 2,
-    title: 'Luxury Villa with Garden',
+    title: 'Modern Villa in Baner',
     location: 'Baner, Pune',
-    price: '₹2.5 Cr',
+    price: '₹1.2 Cr',
     type: 'Villa',
     image: '/img2.jpg',
   },
   {
     id: 3,
-    title: 'Affordable 2BHK Flat',
-    location: 'Wakad, Pune',
-    price: '₹45 Lakhs',
+    title: 'Flat in Thane',
+    location: 'Thane, Mumbai',
+    price: '₹90 Lakhs',
     type: 'Apartment',
     image: '/img3.jpg',
   },
   {
     id: 4,
-    title: 'Modern Studio Apartment',
-    location: 'Koregaon Park, Pune',
-    price: '₹35 Lakhs',
+    title: 'Studio in Whitefield',
+    location: 'Whitefield, Bangalore',
+    price: '₹55 Lakhs',
     type: 'Studio',
     image: '/img4.jpg',
   },
@@ -208,6 +205,7 @@ const properties = [
   },
 ];
 
+
 function chunkArray(array, size) {
   const chunks = [];
   for (let i = 0; i < array.length; i += size) {
@@ -217,66 +215,34 @@ function chunkArray(array, size) {
 }
 
 
-
-const allAreas = ['Baner', 'Wakad', 'Koregaon Park'];
-const allTypes = ['Apartment', 'Villa', 'Studio', 'Penthouse', 'Duplex'];
-
-export default function PropertyList() {
+export default function PropertiesPage() {
+  const searchParams = useSearchParams();
+  const [filteredProperties, setFilteredProperties] = useState(properties);
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [filters, setFilters] = useState({ area: '', type: '' });
-  const [searchClicked, setSearchClicked] = useState(false);
 
-  // Handle search click
-  const handleSearch = () => {
-    setSearchClicked(true);
-  };
+  useEffect(() => {
+    const city = searchParams.get('city');
+    const area = searchParams.get('area');
+    const type = searchParams.get('type');
 
-  // Filter properties
-  const filteredProperties = properties.filter((p) => {
-    const areaMatch = filters.area ? p.location.includes(filters.area) : true;
-    const typeMatch = filters.type ? p.type === filters.type : true;
-    return areaMatch && typeMatch;
-  });
+    const result = properties.filter((p) => {
+      const [areaName, cityName] = p.location.split(',').map((s) => s.trim());
+      const matchCity = city ? cityName === city : true;
+      const matchArea = area ? areaName === area : true;
+      const matchType = type ? p.type === type : true;
+      return matchCity && matchArea && matchType;
+    });
+
+    setFilteredProperties(result);
+  }, [searchParams]);
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">🏠 Property Listings</h1>
+      <h1 className="text-3xl font-bold mb-4">Properties</h1>
 
-      {/* Search Filters */}
-      <div className="bg-white rounded-lg shadow p-4 flex flex-col md:flex-row gap-4 mb-6">
-        <select
-          className="border p-2 rounded w-full md:w-1/3"
-          value={filters.type}
-          onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-        >
-          <option value="">Select Property Type</option>
-          {allTypes.map((type) => (
-            <option key={type}>{type}</option>
-          ))}
-        </select>
-
-        <select
-          className="border p-2 rounded w-full md:w-1/3"
-          value={filters.area}
-          onChange={(e) => setFilters({ ...filters, area: e.target.value })}
-        >
-          <option value="">Select Area</option>
-          {allAreas.map((area) => (
-            <option key={area}>{area}</option>
-          ))}
-        </select>
-
-        <button
-          onClick={handleSearch}
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Search
-        </button>
-      </div>
-
-      {/* Filtered Property Results */}
+      {/* Property Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {(searchClicked ? filteredProperties : properties).map((property) => (
+        {filteredProperties.map((property) => (
           <div
             key={property.id}
             className="cursor-pointer border rounded-lg overflow-hidden shadow hover:shadow-lg transition"
@@ -296,20 +262,16 @@ export default function PropertyList() {
         ))}
       </div>
 
-      {/* No Results */}
-      {searchClicked && filteredProperties.length === 0 && (
+      {filteredProperties.length === 0 && (
         <div className="text-center text-gray-500 mt-6">No matching properties found.</div>
       )}
 
-      {/* Property Modal */}
       {selectedProperty && (
         <PropertyModel
           property={selectedProperty}
           onClose={() => setSelectedProperty(null)}
         />
       )}
-
-      
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 import { Mail, Phone, MessageSquare, Facebook, Linkedin, Instagram } from 'lucide-react';
 import Image from 'next/image';
+import Header from '../components/Header';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 
@@ -35,20 +36,26 @@ export default function AgentProfile() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white py-12 px-6">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">Meet Our Top Agents</h1>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
+      {/* Header */}
+      <Header />
+
+      <h1 className="text-4xl font-bold text-center text-gray-800 mt-16 mb-12">
+  Meet Our Top Agents
+</h1>
+
       <div className="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">
         {agents.map((agent, index) => (
           <div
             key={index}
-            className="bg-white shadow-xl rounded-2xl p-6 flex flex-col md:flex-row items-center gap-8 hover:shadow-2xl transition"
+            className="bg-white shadow-xl rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 md:gap-8 hover:shadow-2xl transition duration-300"
           >
             <Image
               src={agent.image}
               alt={agent.name}
-              width={180}
-              height={180}
-              className="rounded-full object-cover border-4 border-blue-400 shadow-md"
+              width={160}
+              height={160}
+              className="rounded-full object-cover border-4 border-blue-400 shadow-md w-[160px] h-[160px]"
             />
             <div>
               <h2 className="text-2xl font-bold text-gray-800">{agent.name}</h2>
@@ -81,10 +88,10 @@ export default function AgentProfile() {
         ))}
       </div>
 
-      {/* Featured Properties Section */}
-      <div className="mt-16 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-6">Featured Properties</h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {/* Featured Properties */}
+      <div className="mt-20 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-semibold text-center mb-8">Featured Properties</h2>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((n) => (
             <div
               key={n}
@@ -100,7 +107,7 @@ export default function AgentProfile() {
         </div>
       </div>
 
-      {/* Back to Website Button */}
+      {/* Back Button */}
       <div className="flex justify-center mt-16">
         <Link href="/" passHref>
           <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-lg shadow-md transition">
@@ -110,7 +117,7 @@ export default function AgentProfile() {
       </div>
 
       {/* Footer */}
-      <div className="mt-10">
+      <div className="mt-10 p-0 m-0">
         <Footer />
       </div>
     </div>

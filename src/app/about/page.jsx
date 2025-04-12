@@ -1,12 +1,43 @@
 'use client';
 import Image from 'next/image';
+import Header from '../components/Header';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 
+const reviews = [
+  {
+    name: 'Amit Sharma',
+    location: 'Pune Baner',
+    image: '/client2.jpg',
+    rating: 5,
+    feedback:
+      'PropertyHub helped me find my dream apartment in just 3 days. The process was so smooth and the support team was very responsive!',
+  },
+  {
+    name: 'Riya Mehta',
+    location: 'Pune Koregaon-Park',
+    image: '/client1.jpg',
+    rating: 4,
+    feedback:
+      'Very user-friendly platform with genuine listings. I found exactly what I was looking for. Highly recommend PropertyHub!',
+  },
+  {
+    name: 'Rahul Verma',
+    location: 'Pune Wakad',
+    image: '/client4.jpg',
+    rating: 5,
+    feedback:
+      'Excellent service and dedicated agents. They really care about customers and follow through till you get the right property.',
+  },
+];
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-blue-50 to-white">
+      {/* Header */}
+      <Header />
+
       {/* Hero Section */}
       <div className="relative w-full h-72 md:h-96">
         <Image
@@ -29,7 +60,7 @@ export default function AboutPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-16 space-y-14">
+      <div className="max-w-6xl mx-auto px-6 py-16 space-y-20">
         {/* Who We Are */}
         <motion.section
           className="text-center"
@@ -40,8 +71,9 @@ export default function AboutPage() {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Who We Are</h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
-            We are a passionate team helping people find homes they love. At <span className="font-semibold text-blue-600">PropertyHub</span>,
-            we blend technology and personalized service to simplify real estate for buyers, sellers, and agents.
+            We are a passionate team helping people find homes they love. At{' '}
+            <span className="font-semibold text-blue-600">PropertyHub</span>, we blend technology and personalized
+            service to simplify real estate for buyers, sellers, and agents.
           </p>
         </motion.section>
 
@@ -91,6 +123,47 @@ export default function AboutPage() {
             <div>✅ Clean interface & filters</div>
           </div>
         </motion.section>
+
+        {/* Reviews Section */}
+        <motion.section
+          className="text-center"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h4 className="text-3xl font-bold text-gray-800 mb-10">💬 What Our Clients Say</h4>
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {reviews.map((review, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-xl shadow-md p-6 text-left hover:shadow-xl transition"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center mb-4">
+                  <Image
+                    src={review.image}
+                    alt={review.name}
+                    width={50}
+                    height={50}
+                    className="rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h5 className="font-semibold text-lg text-gray-800">{review.name}</h5>
+                    <span className="text-sm text-gray-500">{review.location}</span>
+                  </div>
+                </div>
+                <div className="text-yellow-400 mb-2">
+                  {'⭐'.repeat(review.rating)}
+                </div>
+                <p className="text-gray-600">{review.feedback}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
       </div>
 
       {/* Back to Home */}
@@ -108,6 +181,7 @@ export default function AboutPage() {
         </Link>
       </motion.div>
 
+      {/* Footer */}
       <Footer />
     </div>
   );

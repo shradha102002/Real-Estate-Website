@@ -1,11 +1,15 @@
 'use client';
 import Image from 'next/image';
+import Header from '../components/Header';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0f4ff]"> {/* Soft background color added */}
+    <div className="min-h-screen flex flex-col bg-[#f0f4ff]">
+      {/* Header */}
+      <Header />
+
       {/* Hero Section */}
       <div className="relative w-full h-64 md:h-96">
         <Image
@@ -80,6 +84,7 @@ export default function ContactPage() {
         </Link>
       </div>
 
+      {/* Footer */}
       <Footer />
     </div>
   );

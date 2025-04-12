@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const homes = [
-  // ... [Same homes array as before]
   // Baner
   { title: 'Modern 3BHK in Baner', location: 'Baner', price: '₹1,20,00,000', image: '/img2.jpg' },
   { title: 'Luxury Duplex in Baner', location: 'Baner', price: '₹2,10,00,000', image: '/img3.jpg' },
@@ -39,49 +39,19 @@ const homes = [
   { title: 'Plot + Bungalow near Khadakwasla', location: 'Sinhagad Road', price: '₹1,80,00,000', image: '/img20.jpg' }
 ];
 
-
 export default function PopularHomes() {
-  const [locationFilter, setLocationFilter] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
-  const filteredHomes = homes.filter((home) => {
-    const matchLocation = locationFilter ? home.location === locationFilter : true;
-    const price = parseInt(home.price.replace(/[^0-9]/g, ''));
-    let matchPrice = true;
-    if (priceFilter === 'low') matchPrice = price < 10000000;
-    if (priceFilter === 'mid') matchPrice = price >= 10000000 && price <= 20000000;
-    if (priceFilter === 'high') matchPrice = price > 20000000;
-    return matchLocation && matchPrice;
-  });
-
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentHomes = filteredHomes.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(filteredHomes.length / itemsPerPage);
+  const currentHomes = homes.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(homes.length / itemsPerPage);
 
   return (
-    <section className="py-16 px-4 bg-gray-50">
-      <h2 className="text-3xl font-bold text-center mb-10">Our Popular Homes</h2>
-
-      {/* Filters */}
-      <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
-        <select onChange={(e) => setLocationFilter(e.target.value)} className="px-4 py-2 rounded border border-gray-300">
-          <option value="">All Locations</option>
-          {[...new Set(homes.map((h) => h.location))].map((loc) => (
-            <option key={loc} value={loc}>{loc}</option>
-          ))}
-        </select>
-
-        <select onChange={(e) => setPriceFilter(e.target.value)} className="px-4 py-2 rounded border border-gray-300">
-          <option value="">Any Price</option>
-          <option value="low">Below ₹1 Cr</option>
-          <option value="mid">₹1 Cr - ₹2 Cr</option>
-          <option value="high">Above ₹2 Cr</option>
-        </select>
-      </div>
+    <section className="py-16 px-4 bg-yellow-300">
+      <h2 className="text-6xl font-bold text-center mb-10 text-blue-700">Our Popular Homes</h2>
 
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -112,7 +82,7 @@ export default function PopularHomes() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center mt-8 gap-2">
-          {[...Array(totalPages)].map((_, idx) => (
+          {Array.from({ length: totalPages }, (_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentPage(idx + 1)}
@@ -124,17 +94,36 @@ export default function PopularHomes() {
         </div>
       )}
 
+      {/* Back to Home */}
+      <div className="mt-10 flex justify-center">
+        <Link href="/" passHref>
+          <button className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900 transition">
+            ← Back to Home
+          </button>
+        </Link>
+      </div>
+
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-xl w-[90%] max-w-md relative">
-            <button className="absolute top-3 right-4 text-black text-xl" onClick={() => setShowModal(false)}>×</button>
+            <button
+              className="absolute top-3 right-4 text-black text-xl font-bold"
+              onClick={() => setShowModal(false)}
+            >
+              ×
+            </button>
             <h3 className="text-lg font-bold mb-4">Contact Agent</h3>
             <form className="flex flex-col gap-4">
-              <input type="text" placeholder="Your Name" className="p-2 border rounded" />
-              <input type="email" placeholder="Your Email" className="p-2 border rounded" />
-              <textarea placeholder="Message" className="p-2 border rounded"></textarea>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Send Message</button>
+              <input type="text" placeholder="Your Name" className="p-2 border rounded" required />
+              <input type="email" placeholder="Your Email" className="p-2 border rounded" required />
+              <textarea placeholder="Message" className="p-2 border rounded" rows={4}></textarea>
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              >
+                Send Message
+              </button>
             </form>
           </div>
         </div>
