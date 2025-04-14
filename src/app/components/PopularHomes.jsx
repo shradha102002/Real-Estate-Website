@@ -50,7 +50,7 @@ export default function PopularHomes() {
   const totalPages = Math.ceil(homes.length / itemsPerPage);
 
   return (
-    <section className="py-16 px-4 bg-yellow-300">
+    <section className="py-16 px-4 bg-orange-100">
       <h2 className="text-6xl font-bold text-center mb-10 text-blue-700">Our Popular Homes</h2>
 
       {/* Cards */}
@@ -63,13 +63,21 @@ export default function PopularHomes() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <img src={home.image} alt={home.title} className="w-full h-56 object-cover" />
+            <motion.img
+              src={home.image}
+              alt={home.title}
+              className="w-full h-56 object-cover"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            />
+
             <div className="p-4">
               <h3 className="text-xl font-semibold">{home.title}</h3>
               <p className="text-gray-600">{home.location}</p>
               <p className="text-blue-600 font-bold mt-2">{home.price}</p>
+
               <button
-                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                className="mt-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full hover:from-purple-500 hover:to-blue-600 transition-all duration-300 shadow-md"
                 onClick={() => setShowModal(true)}
               >
                 Contact Agent
@@ -86,7 +94,11 @@ export default function PopularHomes() {
             <button
               key={idx}
               onClick={() => setCurrentPage(idx + 1)}
-              className={`px-4 py-2 border rounded ${currentPage === idx + 1 ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
+              className={`px-4 py-2 border rounded ${
+                currentPage === idx + 1
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-700'
+              }`}
             >
               {idx + 1}
             </button>
@@ -103,17 +115,17 @@ export default function PopularHomes() {
         </Link>
       </div>
 
-      {/* Modal */}
+      {/* Contact Agent Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-xl w-[90%] max-w-md relative">
+          <div className="bg-blue-100 p-6 rounded-xl w-[90%] max-w-md relative shadow-2xl">
             <button
               className="absolute top-3 right-4 text-black text-xl font-bold"
               onClick={() => setShowModal(false)}
             >
               ×
             </button>
-            <h3 className="text-lg font-bold mb-4">Contact Agent</h3>
+            <h3 className="text-lg font-bold mb-4 text-blue-800">Contact Agent</h3>
             <form className="flex flex-col gap-4">
               <input type="text" placeholder="Your Name" className="p-2 border rounded" required />
               <input type="email" placeholder="Your Email" className="p-2 border rounded" required />

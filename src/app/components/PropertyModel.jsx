@@ -14,7 +14,6 @@ export default function PropertyModal({ property, onClose }) {
     return () => (document.body.style.overflow = 'auto');
   }, []);
 
-  // Close on outside click
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       onClose();
@@ -28,7 +27,6 @@ export default function PropertyModal({ property, onClose }) {
       return;
     }
 
-    // Dummy success (frontend only)
     setToast('✅ Message sent successfully!');
     setName('');
     setEmail('');
@@ -100,12 +98,29 @@ export default function PropertyModal({ property, onClose }) {
           </form>
         </div>
 
-        {/* Toast message */}
+        {/* Toast Message */}
         {toast && (
           <div className="mt-4 text-center text-sm text-white bg-green-600 py-2 px-4 rounded-lg animate-fadeIn">
             {toast}
           </div>
         )}
+
+        {/* Dummy India Map */}
+        <div className="mt-6">
+          <h3 className="font-semibold text-lg text-blue-700 mb-2">📍 Property Location</h3>
+          <div className="w-full h-64 rounded-xl overflow-hidden shadow-md">
+            <iframe
+              title="India Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.1160996761!2d72.74109924822905!3d19.082197839324756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63dfd287d8b%3A0x439c1238d9c4cfd4!2sMumbai%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sin!4v1614330175767!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="border-0 w-full h-full"
+            ></iframe>
+          </div>
+        </div>
       </div>
     </div>
   );
