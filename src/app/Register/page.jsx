@@ -7,8 +7,10 @@ export default function Register() {
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: "url('/re.jpg')" }}
     >
-      <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-sm">
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Create Your Account</h2>
+      <div className="bg-white bg-opacity-90 p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-sm">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center text-blue-700">
+          Create Your Account
+        </h2>
         <form className="space-y-4">
           <input
             type="text"

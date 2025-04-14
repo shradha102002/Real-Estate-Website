@@ -14,7 +14,7 @@ const iconItems = [
 export default function Hero() {
   return (
     <section
-      className="h-screen bg-cover bg-center relative flex flex-col items-center justify-center px-4 overflow-hidden font-montserrat"
+      className="h-screen bg-cover bg-center relative flex flex-col items-center justify-center px-4 overflow-hidden font-poppins"
       style={{
         backgroundImage: "url('/img6.jpg')",
       }}
