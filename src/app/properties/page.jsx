@@ -1,17 +1,20 @@
 'use client';
 
 import { Suspense } from 'react';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PropertyList from '../components/PropertyList';
 import Link from 'next/link';
+import Navbar from '../components/Navbar'; // Make sure you import the Navbar component
 
 export default function PropertiesPage() {
   return (
     <div className="m-0 p-0">
-      <Header />
+      {/* Include Navbar at the top */}
+      <Navbar />
 
-      <section className="m-0 p-0 max-w-7xl mx-auto">
+     
+
+      <section className="m-0 p-0 max-w-7xl mx-auto pt-20">
         {/* ✅ Wrapped PropertyList in Suspense */}
         <Suspense fallback={<div className="text-center py-10">Loading properties...</div>}>
           <PropertyList />

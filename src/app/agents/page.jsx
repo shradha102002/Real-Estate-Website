@@ -1,8 +1,9 @@
 'use client';
+
 import { Mail, Phone, MessageSquare, Facebook, Linkedin, Instagram } from 'lucide-react';
 import Image from 'next/image';
-import Header from '../components/Header';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function AgentProfile() {
@@ -37,12 +38,12 @@ export default function AgentProfile() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
-      {/* Header */}
-      <Header />
+      {/* Navbar at the top */}
+      <Navbar /><br/>
 
       <h1 className="text-4xl font-bold text-center text-gray-800 mt-16 mb-12">
-  Meet Our Top Agents
-</h1>
+        Meet Our Top Agents
+      </h1>
 
       <div className="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">
         {agents.map((agent, index) => (

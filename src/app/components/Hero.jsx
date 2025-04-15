@@ -13,26 +13,34 @@ const iconItems = [
 
 export default function Hero() {
   return (
-    <section
-      className="h-screen bg-cover bg-center relative flex flex-col items-center justify-center px-4 overflow-hidden font-poppins"
-      style={{
-        backgroundImage: "url('/img6.jpg')",
-      }}
-    >
+    <section className="relative h-screen w-full overflow-hidden font-poppins">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0 brightness-110"
+      >
+        <source src="/video4.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/*  Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />
+
+      {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-20 text-center max-w-4xl w-full px-4"
+        className="relative z-30 flex flex-col items-center justify-center h-full px-4 text-center max-w-4xl mx-auto"
       >
         <p className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm md:text-base font-semibold mb-4 shadow-lg">
           PROPERTY FOR SALE & FOR RENT AROUND THE WORLD
         </p>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 text-gray-900">
-          Search and Find Your <span className="text-blue-800">Family House</span>
-        </h1>
-
+        {/* Icons */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -62,7 +70,8 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        <div className="flex justify-center w-full">
+        {/* SearchBar */}
+        <div className="flex justify-center w-full z-20">
           <SearchBar />
         </div>
       </motion.div>

@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
@@ -34,10 +34,11 @@ const reviews = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-blue-50 to-white">
-      {/* Header */}
-      <Header />
 
+     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-blue-50 to-white">
+          {/* 🧭 Navbar */}
+          <Navbar />
+      
       {/* Hero Section */}
       <div className="relative w-full h-72 md:h-96">
         <Image

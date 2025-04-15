@@ -50,7 +50,7 @@ export default function PopularHomes() {
   const totalPages = Math.ceil(homes.length / itemsPerPage);
 
   return (
-    <section className="py-16 px-4 bg-orange-100">
+    <section className="py-16 px-4 bg-white-100">
       <h2 className="text-6xl font-bold text-center mb-10 text-blue-700">Our Popular Homes</h2>
 
       {/* Cards */}

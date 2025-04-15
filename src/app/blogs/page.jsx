@@ -1,7 +1,8 @@
 'use client';
-import Header from '../components/Header';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 
@@ -35,9 +36,8 @@ const blogs = [
 export default function BlogPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-blue-50 to-white">
-
-      {/* ✅ 🧭 Header should be on top */}
-      <Header />
+      {/* 🧭 Navbar */}
+      <Navbar />
 
       {/* 🖼️ Hero Section */}
       <div className="relative w-full h-64 md:h-80">
@@ -89,7 +89,9 @@ export default function BlogPage() {
                 <h3 className="text-xl font-bold text-blue-800">{blog.title}</h3>
                 <p className="text-gray-600 text-sm">{blog.snippet}</p>
                 <Link href={`/blog/${blog.id}`}>
-                  <span className="text-blue-600 font-medium hover:underline cursor-pointer">Read More →</span>
+                  <span className="text-blue-600 font-medium hover:underline cursor-pointer">
+                    Read More →
+                  </span>
                 </Link>
               </div>
             </motion.div>
@@ -114,7 +116,6 @@ export default function BlogPage() {
 
       {/* 📩 Footer */}
       <Footer />
-    
     </div>
   );
 }

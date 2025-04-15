@@ -1,14 +1,15 @@
 'use client';
 import Image from 'next/image';
-import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f0f4ff]">
-      {/* Header */}
-      <Header />
+       {/* 🧭 Navbar */}
+                <Navbar />
+  
 
       {/* Hero Section */}
       <div className="relative w-full h-64 md:h-96">
