@@ -107,7 +107,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#1e293b] text-white px-6 py-5 space-y-4 shadow-md rounded-b-xl text-sm font-medium animate-slideDown">
+        <div className="md:hidden bg-white text-[#1e293b] px-6 py-5 space-y-4 shadow-md rounded-b-xl text-sm font-medium animate-slideDown">
           {navItems.map(({ name, href, icon }) => (
             <Link key={href} href={href} className="flex items-center gap-2 font-bold text-black hover:text-yellow-400 transition">
               {icon}

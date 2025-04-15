@@ -20,14 +20,14 @@ export default function Hero() {
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0 brightness-110"
+        className="absolute inset-0 w-full h-full object-cover z-0"
       >
         <source src="/video4.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      {/*  Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 z-10" />
 
       {/* Content */}
       <motion.div
